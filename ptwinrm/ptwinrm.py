@@ -128,9 +128,13 @@ class WinRMConsole(object):
                       key_bindings_registry=manager.registry,
                       style=style)
 
+        try:
+            prompt_msg = self.get_prompt()
+        except:
+            return
         while True:
             try:
-                cmd_line = ppt(self.get_prompt(), multiline=self.multiline)
+                cmd_line = ppt(prompt_msg, multiline=self.multiline)
                 self.rep(cmd_line)
             except (EOFError, KeyboardInterrupt):
                 print('\nCtrl-C pressed. Bailing out!')
