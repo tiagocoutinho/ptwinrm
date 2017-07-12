@@ -89,7 +89,7 @@ class WinRMConsole(object):
 
     def get_prompt(self):
         r = self.run_cmd_line('cd')
-        return r.std_out.strip()
+        return r.std_out.strip() + '>'
 
     def rep(self, cmd_line):
         result = self.run_cmd_line(cmd_line)
@@ -130,8 +130,7 @@ class WinRMConsole(object):
 
         while True:
             try:
-                cmd_line = ppt(self.get_prompt() + '>' ,
-                               multiline=self.multiline)
+                cmd_line = ppt(self.get_prompt(), multiline=self.multiline)
                 self.rep(cmd_line)
             except (EOFError, KeyboardInterrupt):
                 print('\nCtrl-C pressed. Bailing out!')
